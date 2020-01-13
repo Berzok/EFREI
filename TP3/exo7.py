@@ -8,7 +8,6 @@ def facto(x):
 
 def expo(x):
     result = float(1+x)
-    print(result)
     for i in range(2, 40):
         result += (x**i)/facto(i)
     return result
