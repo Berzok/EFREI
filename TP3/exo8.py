@@ -62,7 +62,6 @@ def diminution(liste):
 def verifInput(liste):
     nbParentheseOuvrantes = 0
     nbParentheseFermantes = 0
-    print(liste)
     for index, valeur in enumerate(liste):
         if not valeur.isdigit() and valeur not in ['+', '-', '*', '/', '(', ')', '.']:
             return 0
