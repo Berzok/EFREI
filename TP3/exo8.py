@@ -9,7 +9,8 @@ def makeListe(entree):
                 liste.append(entree[compteur:index])
             liste.append(valeur)
             compteur = index + 1
-    liste.append(entree[compteur:])
+    if compteur != len(entree):
+        liste.append(entree[compteur:])
     return liste
 
 
@@ -19,19 +20,24 @@ def calculate(liste):
             liste[index] = float(liste[index - 1]) * float(liste[index + 1])
             liste.pop(index + 1)
             liste.pop(index - 1)
+            return calculate(liste)
         if valeur == '/':
             liste[index] = float(liste[index - 1]) / float(liste[index + 1])
             liste.pop(index + 1)
             liste.pop(index - 1)
+            return calculate(liste)
     for index, valeur in enumerate(liste):
         if valeur == '+':
             liste[index] = float(liste[index - 1]) + float(liste[index + 1])
             liste.pop(index + 1)
             liste.pop(index - 1)
+            return calculate(liste)
+
         if valeur == '-':
             liste[index] = float(liste[index - 1]) - float(liste[index + 1])
             liste.pop(index + 1)
             liste.pop(index - 1)
+            return calculate(liste)
     if len(liste) > 1:
         return calculate(liste)
     return liste[0]
@@ -56,8 +62,8 @@ def diminution(liste):
                 for i in range(index - number):
                     liste.pop(number)
                 liste[number] = remplacement
+                break
     return calculate(liste)
-
 
 def verifInput(liste):
     nbParentheseOuvrantes = 0
