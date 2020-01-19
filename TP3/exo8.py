@@ -65,6 +65,7 @@ def diminution(liste):
                 break
     return calculate(liste)
 
+
 def verifInput(liste):
     nbParentheseOuvrantes = 0
     nbParentheseFermantes = 0
@@ -85,8 +86,8 @@ def verifInput(liste):
 
 entree = str(input())
 while verifInput(entree) == 0:
-    print('pas bon')
+    print('pas bon, veuillez réécrire l expression: ')
     entree = str(input())
 entree = makeListe(entree)
 print(entree)
-print(diminution(entree))
+print('votre résultat: ' + str(diminution(entree)))
