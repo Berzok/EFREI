@@ -1,3 +1,5 @@
+import re
+
 """
     <instruction> ::= <affectation> | <conditionnelle>
     <conditionnelle> ::= ? <condition> : <affectation>
@@ -8,23 +10,52 @@
     <terme> ::= <identificateur> | <nombre> | ( <expression> )
 """
 
-class Parseur:
 
+class Parseur:
     types = ['instruction', 'conditionnelle', 'condition', 'affectation', 'expression', 'facteur', 'terme']
 
-    identificateur = '\b\w{1}\d*\b'
+    identificateur = '\b\w{1}\d*\b'  # <identificateur> ::= <lettre> | <lettre><chiffre>
+
     nombre = '\b\d+'
 
+    listeLexicale = ['[a-zA-Z0-9]', '[-]', '[+]', '[?]', '[:]', '[#]', '[=]', '[*]', '[/]', '\s']
+
+    condition = ''
+
+    conditionnelle = ''
+
+    tabExpression = []
+
+    def __init__(self):
+        self.remplir()
+
+    def analyse(self):
+        for index, valeur in enumerate(self.tabExpression):
+            for value in valeur:
+                error = 1
+                for regex in self.listeLexicale:
+                    if re.search(regex, value):
+                        error = 0
+                if error == 1:
+                    print('Erreur !\nAt line ' + str(index + 1) + '\n' + value + ' sur l\'expression ' + valeur)
+                    print('')
+                    break
 
 
-    def __init__(self, expression):
-        self.expression = expression
-
-    def analyser(self):
-        pass
-
-    def findType(self, expression):
+    def afficherTab(self):
+        for compteur, i in enumerate(self.tabExpression):
+            print('['+str(compteur+1)+']: ' + i)
 
 
-expression = 'A1 = A * 100 + 2*B'
-expression2 = '? A1 = B : C = D'
+    def remplir(self):
+        valeur = input(' =>Veuillez entrer une expression (Ou rien pour finir): \n')
+        if (valeur == ''):
+            return
+        self.tabExpression.append(valeur)
+        return self.remplir()
+
+
+parse = Parseur()
+parse.afficherTab()
+print('\n')
+parse.analyse()
