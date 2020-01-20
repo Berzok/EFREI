@@ -12,17 +12,8 @@ import re
 
 
 class Parseur:
-    types = ['instruction', 'conditionnelle', 'condition', 'affectation', 'expression', 'facteur', 'terme']
-
-    identificateur = '\b\w{1}\d*\b'  # <identificateur> ::= <lettre> | <lettre><chiffre>
-
-    nombre = '\b\d+'
 
     listeLexicale = ['[a-zA-Z0-9]', '[-]', '[+]', '[?]', '[:]', '[#]', '[=]', '[*]', '[/]', '\s']
-
-    condition = ''
-
-    conditionnelle = ''
 
     tabExpression = []
 
